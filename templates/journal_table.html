@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+
+{% block head%}
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+{% endblock %} 
+
+{% block content%}
+<div class="row" >
+          
+    <div class="col-2">
+        <nav class="nav flex-column" style="background-color: #d6e0ccc8;" >           
+            <ul class="nav flex-column">
+                <h3>Meta analysis</h3>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Project Analysis</button></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{url_for('journal_datas',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Download full data</button></a>
+                </li>
+                
+            </ul>
+            
+        </nav>
+        </div>
+      <div class="col-9"> 
+        <div class="alert alert-primary text-center" role="alert">
+            <h2> Frequency distribution of top <strong >Journals</strong></h2>
+        </div>  
+        <img src="/static/images/journal_count_{{folder_name}}.png" alt="images not found">  
+        <br><br>
+      
+        <table id="data" class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="row">#</th>
+            <th scope="col">Name of the Journal</th>
+            <th scope="col">ISSN</th>
+            <th scope="col"> # of publication</th>
+            <th scope="col"> Yearly trends</th>
+
+        
+        </tr>
+        </thead>
+        
+        <tbody>
+        {% for i in data %}
+        <tr>
+            <th scope="row">{{loop.index}}</th>
+            <th scope="row">{{i[0]}}</th>
+            <td class="bg-warning text-center"><a  class="list-group-item list-group-item-action"> {{i[2]}}</a></td>
+            <td class="bg-success text-center"><a  class="list-group-item list-group-item-action"> {{i[1]}}</a></td>
+            <th class="bg-light text-center"><a class="btn btn-secondary" href="{{url_for('year_trend',folder_name=folder_name,num=1,word=i[0])}}" role="button">trend</a></th>
+            
+        </tr>
+        {% endfor %}
+        </tbody>
+        
+    </table>
+    <br><br> 
+    </div>
+</div>
+
+
+{% endblock %}   
+{% block scripts %}
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#data').DataTable({
+          columns: [
+            {searchable: false},
+            null,
+            {searchable: false,orderable: false},
+            {searchable: false},
+            {searchable: false,orderable: false}
+           ],
+        });
+      });
+    </script>
+  
+  {% endblock %}  

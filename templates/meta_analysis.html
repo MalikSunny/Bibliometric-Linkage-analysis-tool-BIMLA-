@@ -1,0 +1,491 @@
+{% extends 'base.html' %}
+
+
+ 
+
+
+
+{% block content %}
+{% if plot==1%}
+    
+    <div class="row"  >
+                    <div class="col-2">
+                        <nav class="nav flex-column" style="background-color: #d6e0ccc8;">           
+                            <ul class="nav flex-column">
+                                <h3>Meta analysis</h3>
+                                <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Previous page</button></a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('year_datas',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Download data</button></a>
+                                </li>
+                                
+                            </ul>
+                            
+                        </nav>
+                        </div>
+                    <div class="col-6"> 
+                        <div class="alert alert-primary" role="alert">
+                            <h2> Distribution of publication in different years</h2>
+                        </div>
+                    
+                    {% if plot_url %}
+                        <img src="data:image/png;base64, {{ plot_url }}">
+                    {% endif%}
+                    
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Year of publication</th>
+                            <th scope="col"> # of publication</th>
+                        
+                        </tr>
+                        </thead>
+                        {% for i in data %}
+                        <tbody>
+                        <tr>
+                            <th scope="row">{{i[0]}}</th>
+                            <td class="bg-success"><a href="#" class="list-group-item list-group-item-action"> {{i[1]}}</a></td>
+                            
+                        </tr>
+                        
+                        </tbody>
+                        {% endfor %}
+                    </table> 
+                    </div>
+    </div>
+      
+{% elif plot==2 %}
+               
+    <div class="row" >
+          
+        <div class="col-2">
+            <nav class="nav flex-column" style="background-color: #d6e0ccc8;" >           
+                <ul class="nav flex-column">
+                    <h3>Meta analysis</h3>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Previous page</button></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('journal_datas',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Download full data</button></a>
+                    </li>
+                    
+                </ul>
+                
+            </nav>
+            </div>
+          <div class="col-9"> 
+            <div class="alert alert-primary" role="alert">
+                <h2> Frequency distribution of top <strong >Journals</strong></h2>
+            </div>  
+            <img src="/static/images/journal_count_{{folder_name}}.png" alt="images not found">  
+          <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Name of the Journal</th>
+                <th scope="col">ISSN</th>
+                <th scope="col"> # of publication</th>
+
+            
+            </tr>
+            </thead>
+            {% for i in data %}
+            <tbody>
+            <tr>
+                <th scope="row">{{i[0]}}</th>
+                <td class="bg-warning"><a  class="list-group-item list-group-item-action"> {{i[2]}}</a></td>
+                <td class="bg-warning"><a  class="list-group-item list-group-item-action"> {{i[1]}}</a></td>
+                
+            </tr>
+            
+            </tbody>
+            {% endfor %}
+        </table> 
+        </div>
+    </div>
+   
+
+{% elif plot==3 %}
+ 
+        <div class="row" >
+          <div class="col-2">
+              <nav class="nav flex-column" style="background-color: #d6e0ccc8;">           
+                <ul class="nav flex-column">
+                    <h3>Meta analysis</h3>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Previous page</button></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('country_datas',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Download full data</button></a>
+                    </li>
+                    
+                </ul>
+                
+              </nav>
+            </div>
+            <div class="col-9"> 
+                <div class="alert alert-primary" role="alert">
+                    <h2> Frequency distribution of top <strong >Countries</strong></h2>
+                </div>  
+            <img src="/static/images/country_count_{{folder_name}}.png" alt="images not found">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Name of the Country</th>
+                    <th scope="col"> # of publication</th>
+                    <th scope="col"> # of publication (fractional)</th>
+                
+                </tr>
+                </thead>
+                {% for i in data %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{i[0] | title}}</th>
+                    <td class="bg-warning"><a href="#" class="list-group-item list-group-item-action"> {{i[1] |round| int}}</a></td>
+                    <td class="bg-warning"><a href="#" class="list-group-item list-group-item-action"> {{i[2] |round| int}}</a></td>
+                </tr>
+                
+                </tbody>
+                {% endfor %}
+            </table> 
+            </div>
+        </div>
+      
+{% elif plot==4 %}
+    
+    <div class="row">
+        <div class="col-2">
+            <nav class="nav flex-column" style="background-color: #d6e0ccc8;" >           
+              <ul class="nav flex-column">
+                  <button type="button" class="btn btn-secondary"><h3>Meta Analysis</h3></button>
+                  <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Project Analysis</button></a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('author_datas',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Download full data</button></a>
+                  </li>
+                  
+              </ul>
+              
+            </nav>
+          </div>
+          
+          <div class="col-10"> 
+            <div class="alert alert-primary" role="alert">
+                <h2> Name of top 50 <strong >Authors </strong> with latest affiliation</h2>
+            </div>  
+            <img src="/static/images/author_count_{{folder_name}}.png" alt="images not found">
+        <table class="table table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Name of the Author</th>
+                <th scope="col"> # of publication</th>
+                <th scope="col"> Affiliation </Address></th>
+            
+            </tr>
+            </thead>
+            {% for i in data %}
+            <tbody>
+            <tr>
+                <th scope="row">{{i[1] | title}}</th>
+                <td class="bg-success"><a href="#" class="list-group-item list-group-item-action"> {{i[0] }}</a></td>
+                <td class="bg-warning"><a href="#" class="list-group-item list-group-item-action"> {{i[2] }}</a></td>
+            </tr>
+            
+            </tbody>
+            {% endfor %}
+        </table> 
+        </div>
+    </div>
+  
+{% elif plot==5 %}
+  
+    <div class="row">
+        <div class="col-2">
+            <nav class="nav flex-column" style="background-color: #d6e0ccc8;" >           
+              <ul class="nav flex-column">
+                  <button type="button" class="btn btn-secondary"><h3>Meta Analysis</h3></button>
+                  <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Project Analysis</button></a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('keyword_advance',page=0,folder_name=folder_name,level=0)}}"><button type="button" class="btn btn-link">Similar keywords level-1</button></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('keyword_advance',page=0,folder_name=folder_name,level=1)}}"><button type="button" class="btn btn-link">Similar keywords level-2</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('keyword_advance',page=0,folder_name=folder_name,level=2)}}"><button type="button" class="btn btn-link">Similar keywords level-3</button></a>
+                        </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('keyword_advance',page=0,folder_name=folder_name,level=4)}}"><button type="button" class="btn btn-link">Similar keywords level-4</button></a>
+                        </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('keyword_advance',page=0,folder_name=folder_name,level=5)}}"><button type="button" class="btn btn-link">Similar keywords level-5</button></a>
+                        </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('keyword_advance',page=0,folder_name=folder_name,level=3)}}"><button type="button" class="btn btn-link">Similar keywords level-6</button></a>
+                        </li>           
+              </ul>
+              
+            </nav>
+          </div>
+          
+        
+        <div class="col-9"> 
+            <div class="alert alert-primary" role="alert">
+                <h2> Top 100 <strong >Author's keyword </strong> in the records</h2>
+            </div>  
+            
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="row">#</th>
+                <th scope="col">Author Keywords</th>
+                <th scope="col"> Frequency</th>
+                <th scope="col"> Yearly trends</th>
+            </tr>
+            </thead>
+            {% for i in data %}
+            <tbody>
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <th scope="row">{{i[0] | title}}</th>
+                <td class="bg-warning"><a href="#" class="list-group-item list-group-item-action"> {{i[1] }}</a></td>
+                <th scope="row"><a class="btn btn-secondary" href="{{url_for('keyword_trend',folder_name=folder_name, word=i[0])}}" role="button"> Annual trend</a></th>
+            </tr>
+            
+            </tbody>
+            {% endfor %}
+        </table> 
+        </div>
+    </div>
+    
+{% elif plot==6 %}
+  
+    <div class="row">
+        <div class="col-2">
+            <nav class="nav flex-column" style="background-color: #d6e0ccc8;">           
+              <ul class="nav flex-column">
+                  <h3>Meta analysis</h3>
+                  <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Project Analysis</button></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('author_keywords',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Author keywords</button></a>
+                    </li>
+                  
+              </ul>
+              
+            </nav>
+          </div>
+
+    <div class="col-10">
+        <div class="alert alert-success" role="alert">
+            <h3>Pairs of keywords with high similarity </h3>
+          </div>
+        <form action="/projects/{{folder_name}}/keyword_manuals/{{page|int}}" method="POST">
+            <table class="table text-start">
+            <thead>
+              <tr>
+                  <th scope="row">#</th>
+                  <th>Similar keywords</th>
+                  <th> frequency</th>
+                  <th>select</th>
+    
+              </tr>
+            </thead>
+            <tbody>
+                
+            {% for i in data %}
+    
+              <table class="table text-start" >
+                <tr>
+                  <td colspan="4" class="table-warning" style="text-align: right;"> Select the single checkbox </td>
+              </tr>
+                {% for j in i%}
+    
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>
+                  <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="floatingInput" name="keyword_name_{{j[0]}}" value="{{j[2]}}">
+                      <label for="floatingInput">{{j[2]}}</label>
+                  </div>
+              </td>
+                <input type="hidden" id="simid" name="simid_name_{{j[0]}}" value="{{j[1]}}">
+    
+                  <td>{{j[3]}}</td>
+                  <td>
+                  <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="checkbox_name"value="{{j[0]}}" id="flexCheckDefault">
+                  </div>
+                  </td>
+                </tr>
+        
+        
+                  {% endfor%}
+                  </tr>
+                    <tr>
+                    <td colspan="4" class="table-active"></td>
+                  </tr>
+        
+                </table>
+                  {% endfor%}
+              </tbody>
+            </table>
+            <td><button type="submit" class="btn btn-primary btn-lg"> Submit</button></td>
+      
+          </form>
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <div>
+                    Please submit the selected pairs before moving to another page
+                </div>
+              </div>
+          <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item">
+            <a class="page-link" href="{{url_for('keyword_manual',page= page-1, folder_name=folder_name)}}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="{{url_for('keyword_manual',page= page+1,folder_name=folder_name )}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>    
+    </div>
+    </div>
+ 
+{% elif plot==7 %}
+   
+   <div class="row">
+    <div class="col-2">
+        <nav class="nav flex-column" style="background-color: #d6e0ccc8;">           
+          <ul class="nav flex-column">
+              <h3>Meta analysis</h3>
+              <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Project Analysis</button></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('author_keywords',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Author keywords</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('keyword_advance_update',folder_name=folder_name,level=level,page=0 )}}"><button type="button" class="btn btn-link">Update pairs</button></a>
+                    </li>
+
+          </ul>
+          
+        </nav>
+      </div>
+
+ <div class="col-10">
+    <div class="alert alert-success" role="alert">
+        <h3>Pairs of keywords with high similarity </h3>
+      </div>
+    <form action="/projects/{{folder_name}}/keyword_advances/{{level}}/update/{{page|int}}" method="POST">
+        <table class="table text-start">
+         <thead>
+          <tr>
+              <th scope="row">#</th>
+              <th>Similar keywords</th>
+              <th> frequency</th>
+              <th>select</th>
+ 
+          </tr>
+        </thead>
+        <tbody>
+            
+         {% for i in data %}
+ 
+          <table class="table text-start" >
+            <tr>
+              <td colspan="4" class="table-warning" style="text-align: right;"> Select the single checkbox </td>
+           </tr>
+            {% for j in i%}
+ 
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>
+              <div class="form-floating mb-3">
+                   <input type="text" class="form-control" id="floatingInput" name="keyword_name_{{j[0]}}" value="{{j[2]}}">
+                   <label for="floatingInput">{{j[2]}}</label>
+              </div>
+           </td>
+             <input type="hidden" id="simid" name="simid_name_{{j[0]}}" value="{{j[1]}}">
+ 
+               <td>{{j[3]}}</td>
+               <td>
+               <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="checkbox_name"value="{{j[0]}}" id="flexCheckDefault">
+               </div>
+              </td>
+             </tr>
+    
+    
+               {% endfor%}
+               </tr>
+                <tr>
+                 <td colspan="4" class="table-active"></td>
+              </tr>
+    
+             </table>
+              {% endfor%}
+           </tbody>
+        </table>
+        <td><button type="submit" class="btn btn-primary btn-lg"> Submit</button></td>
+  
+       </form>
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <div>
+                Please submit the selected pairs before moving to another page
+            </div>
+          </div>
+       <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+      <li class="page-item">
+        <a class="page-link" href="{{url_for('keyword_advance',page=page-1, folder_name=folder_name,level=level)}}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{url_for('keyword_advance',page=page+1,folder_name=folder_name, level=level )}}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>    
+</div>
+   </div>
+
+
+   
+{% else %}
+   
+  <div class="row">
+        <div class="col-2">
+            <nav class="nav flex-column" style="background-color: #d6e0ccc8;">           
+              <ul class="nav flex-column">
+                  <h3>Meta analysis</h3>
+                  <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"><button type="button" class="btn btn-link">Previous page</button></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"><button type="button" class="btn btn-link">Download the data</button></a>
+                    </li>
+                  
+              </ul>
+              
+            </nav>
+          </div>
+        <div class="col-10">
+        <img src="/static/images/keyword_trend_{{folder_name}}.png" alt="images not found">
+       </div>
+</div>
+     
+{% endif%}                
+{% endblock %} 
+
+

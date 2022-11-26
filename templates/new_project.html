@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% block content%}
+
+<div class="row ">
+    <div class="row justify-content-center">
+    <div class="col-5">
+           <div class="alert alert-primary text-center" role="alert">
+            <h2> Create a new project </h2>
+           </div>
+    
+ <form method="POST" enctype="multipart/form-data">
+    <div class="mb-3 justify-content-center">
+        <label for="project_name" class="form-label">Project name</label>
+        
+        <input type="text" name="project_name" 
+               placeholder="Name of new project" 
+               value="{{ request.form['project_name'] }}"> </input>
+        <div id="formHelp" class="form-text"> The new project name should be unique.</div>       
+    </div>       
+        <br>
+        <input type="file" name="file">
+        <button type="submit" value="Upload"> Submit</button>
+    </form> 
+</div>
+</div>
+</div>   
+        
+
+{% endblock %}

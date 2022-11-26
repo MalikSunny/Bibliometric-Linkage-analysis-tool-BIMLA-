@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+{% block content%}
+<div class="row ">
+    <div class="row justify-content-center">
+        <div class="col-9">
+    <div class="alert alert-primary text-center" role="alert">
+        <h2> {% block title %} Submit all .csv files downloaded from scopus database {% endblock %}</h2>
+    </div>
+    
+        <br>
+    <p> Your files will be merge and download by the name of 'combine_file.csv' , if individual files are in standard format otherwise a error will be
+        shown for selective file with potential row number of the error  </p>    
+ <form method="POST" enctype="multipart/form-data">
+            
+        <br>
+        <input type="file" name="file" multiple="">
+        <button type="submit" value="Upload"> Submit</button>
+    </form> 
+    </div>
+</div>
+</div>
+        
+
+{% endblock %}

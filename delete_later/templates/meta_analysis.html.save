@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content" class="col-10">
+       <h1 style="text-align: center;">this is a try</h1>
+<div class="col-10">
+
+       <table class="table text-start">
+        <thead>
+         <tr>
+             <th scope="row">#</th>
+             <th>Similar keywords</th>
+             <th> frequency</th>
+             <th>select</th>
+
+         </tr>
+       </thead>
+       <tbody>
+         {% for i in data %}
+         <table class="table text-start" >  
+           {% for j in i%}
+           <form action="/keyword" method="POST">
+         <tr>
+           <th scope="row">{{loop.index}}</th>
+          
+           <td>
+             <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" name="keyword_name" value="{{j[2]}}">
+                  <label for="floatingInput">{{j[2]}}</label>
+             </div>
+          </td>
+            <input type="hidden" id="recordId" name="recordId" value={{j[0]}}>
+            <input type="hidden" id="recordId" name="simId" value={{j[1]}}>
+           <td>{{j[3]}}</td>
+           <td><button type="submit" class="btn btn-primary btn-sm"> Submit</button></td>
+         </tr> 
+           </form> 
+           {% endfor%}
+         <tr>
+             <td colspan="3" class="table-active"></td>
+          </tr>
+         </table>
+
+        {% endfor %}
+       </tbody>
+     </table>
+     <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+
+</div>
+{% endblock %}

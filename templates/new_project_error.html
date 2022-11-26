@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+
+
+{% block content%}
+                  <div class="alert alert-primary" role="alert">
+                        <h2> Error occured while creating new project</h2>
+                  </div>
+            
+            {% if err==1%}
+            <div class="alert alert-warning" role="alert">
+                  <h2> No file provided</h2>
+            </div>
+                  
+            {% elif err==3%}
+                  {% for message in get_flashed_messages() %}
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>{{message}}</strong>   
+                        
+                      </div>      
+                  {% endfor %}
+                  <h2> The following  row numbers  have  the issue</h2>
+                  {% for row in faulty_rows%}
+                  <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{row}}</li>
+                  </ul>      
+                  {% endfor %}
+                     
+                     
+            {% else %}
+             <div class="card text-bg-danger text-start">
+                  <div class="card-header">
+                        <h3> The given project name already exists </h3>
+                  </div>
+                  
+                  <div  class="card-body">
+                        
+                  <h3>Other existing projects</h3>
+                  {% for f in folder%}
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><h4>{{f}}</h4></li>  
+                  
+                    </ul>
+                  {% endfor %}
+            </div>
+      </div>
+
+            {% endif %}            
+
+
+
+
+{% endblock %}
+
+
+
+  

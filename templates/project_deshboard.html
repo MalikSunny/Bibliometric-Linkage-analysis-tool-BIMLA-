@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+ 
+{% block head%}
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+{% endblock %} 
+
+{% block content%}
+<br>
+
+<div class="row"  >
+    <div class="col-2">
+         <nav class="nav flex-column" style="background-color: #d6e0ccc8;>           
+            <ul class="nav flex-column">
+                <button type="button" class="btn btn-secondary"><h3>Meta Analysis</h3></button>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('country',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Countries</button></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{url_for('year',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Year</button></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{url_for('journal',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Journal</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('author',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Author</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('author_keywords',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Author keywords</button></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('reference',folder_name=folder_name )}}"><button type="button" class="btn btn-link">References</button></a>
+                </li>
+
+            </ul>
+            
+        </nav>    
+        </div>
+    <div class="col-9">      
+       <div class="card text-bg-success text-start">
+            <div class="card-header">
+                <h3> A brief summary about the project: <strong>{{folder_name}}</strong></h3>
+            </div>
+      
+            <br>
+         <div  class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><h4>Total number of Records in current project: {{r_info[0]}} </h4></li>
+              <li class="list-group-item"><h5>Total number of authors: {{r_info[1]}}</h5></li>
+              <li class="list-group-item"><h5>Number of unique authors: {{r_info[2]}}</h5></li>
+              <li class="list-group-item"><h5>Number of records with no authors: {{r_info[3]}}</h5></li>
+              
+              <li class="list-group-item"><h5>Total number of sources (journals): {{r_info[4]}}</h5></li>
+              <li class="list-group-item"><h5>Number of records with no source info: {{r_info[5]}}</h5></li>
+
+              <li class="list-group-item"><h5>Total number of author's submitted keywords: {{r_info[6]}}</h5></li>
+              <li class="list-group-item"><h5>Number of unique author's keywords: {{r_info[7]}}</h5></li>
+              <li class="list-group-item"><h5>Number of records with no author's keywords: {{r_info[8]}}</h5></li>
+
+              <li class="list-group-item"><h5>Number of records with no abstracts: {{r_info[9]}}</h5></li>
+              
+            </ul>
+          </div>
+        </div>
+       <br><br><br>
+        <table id="data" class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="row">#</th> 
+                <th>record_id</th>
+                <th>Citations</th>
+                <th scope="col">Journal</th>
+            
+            </tr>
+            </thead>
+            
+            <tbody>
+         {% for i in data %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <th scope="row"><a class="btn btn-secondary" href="{{url_for('individual_record',folder_name=folder_name, record_number=i[0])}}" role="button"> {{i[1] | title}}</a></th>
+                <td class="bg-warning text-center">{{i[2]}}</th>
+                <th scope="row">{{i[3] | title}}</th>
+                
+                
+            </tr>
+            {% endfor %}
+            </tbody>
+            
+        </table> 
+        <br><br><br>
+    </div>
+</div>
+      
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#data').DataTable({
+          columns: [
+            {searchable: false},
+            {orderable: false},
+            {searchable: false},
+            {orderable: false},
+           ],
+        });
+      });
+    </script>
+  
+  {% endblock %}
+

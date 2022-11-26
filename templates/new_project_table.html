@@ -1,0 +1,41 @@
+
+
+{% extends 'base.html' %} 
+{% block head%}
+<style>
+    selector {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    </style>
+{% endblock %}    
+{% block content%}
+
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 3%" >#</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    {% for record in records %}
+
+    <tbody>
+      <tr>
+        <th scope="row">{{record[0]}}</th>
+        <!--<td  style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal;" >{{record[1]}}</td>-->
+        <td>{{record[1]}}</td>
+        <td>{{record[1]}}</td>
+        <td>{{record[1]}}</td>
+      </tr>
+      
+    </tbody>
+    {% endfor %}
+  </table> 
+</div>
+  
+{% endblock %}

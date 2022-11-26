@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   {% for i in data%}
+       {{i}}
+       <br>
+   {% endfor %}
+
+
+{% endblock %}<div class="content">
+       <h1 style="text-align: center;">this is a try</h1>
+
+       <table>
+         <tr>
+             <th>References</th>
+
+         </tr>
+         {% for task in tasks %}
+         <tr>
+            <td>{{task[2]}}</td>
+        </tr>
+        <tr>
+            <td>{{task[4]}}</td>
+        </tr>
+
+<div class="content">
+       <h1 style="text-align: center;">this is a try</h1>
+
+       <table>
+         <tr>
+             <th>References</th>
+
+         </tr>
+         {% for task in tasks %}
+         <tr>
+            <td>{{task[2]}}</td>
+        </tr>
+        <tr>
+            <td>{{task[4]}}</td>
+        </tr>
+

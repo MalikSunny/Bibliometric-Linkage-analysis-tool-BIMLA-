@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-2">
+        <nav class="nav flex-column" style="background-color: #d6e0ccc8;">           
+          <ul class="nav flex-column">
+              <h3>Meta analysis</h3>
+              <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{url_for('open_project',folder_name=folder_name )}}"><button type="button" class="btn btn-link">Project Analysis</button></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('individual_record',folder_name=folder_name,record_number=record_number)}}"><button type="button" class="btn btn-link">Back to Full Page</button></a>
+                </li>
+          </ul> 
+        </nav>
+      </div>
+    <div class="col-10">
+    <form method="POST">
+                        
+    <label for="message-text" class="col-form-label">References:</label>
+    
+    <textarea class="form-control" id="message" rows="15" name="ref_message_name">{{ref_full}}</textarea>
+
+    <button class="btn btn-primary" type="submit" id="sunny">Submit</button>
+</form>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    var textarea = document.getElementById('message');
+    textarea.setSelectionRange({{r_pattern[0]}},{{r_pattern[1]}});
+    textarea.focus();
+    //textarea.select();
+    
+   
+ </script>
+{% endblock %}

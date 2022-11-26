@@ -1,0 +1,20 @@
+html {
+    font-size: 22px;
+}
+body {
+   background-color: #333;
+   color: whitesmoke;
+}
+
+@media screen {
+    .navbar .container-fluid{
+        flex-direction: column;
+    }
+
+    .navbar {
+        width: 20%;
+        height: 100vh;
+        align-items: flex-start;
+    }
+}
+

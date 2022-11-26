@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+
+ 
+
+{% block content%}
+  <div class="row">
+    <div class="row justify-content-center">
+    <div class="col-10 text-center">
+    <div class="alert alert-primary" role="alert">
+        <h2>List of existing projects</h2>
+     </div>
+        
+        
+        
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="row">#</th>
+                <th scope="col"><h3>Name of the project</h3></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+          
+            <tbody>
+              {% for f in folder%}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <th scope="row">{{f}}</th>
+                <td class="bg-success"><a href= {{url_for('open_project' ,folder_name=f )}} class="list-group-item list-group-item-action"> Open project</a></td>
+                <td class="bg-danger"> <a href= {{url_for('delete_project' ,folder_name=f )}} class="list-group-item list-group-item-action"> Delete the project</a></td>
+                <td class="bg-primary"><a href="#" class="list-group-item list-group-item-action">Filter</a></td>
+                <td class="bg-info"><a href="#" class="list-group-item list-group-item-action"> Export</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            
+          </table> 
+   </div> 
+  </div> 
+</div>     
+          
+      
+{% endblock %}
+

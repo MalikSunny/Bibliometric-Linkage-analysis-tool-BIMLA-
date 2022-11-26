@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block head%}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+
+    {% endblock %} 
+{% block content %}
+<form>
+                        
+    <label for="message-text" class="col-form-label">References:</label>
+    
+    <textarea class="form-control" id="message" rows="15" >{{data}}</textarea>
+
+    <button class="btn btn-primary" type="submit" id="sunny">Submit</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    var textarea = document.getElementById('message');
+    const end = {{we}};
+    textarea.setSelectionRange({{r_pattern[1][0]}},{{r_pattern[1][1]}});
+    textarea.focus();
+    //textarea.select();
+    
+   
+ </script>
+{% endblock %}
